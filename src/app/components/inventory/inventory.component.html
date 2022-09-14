@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>     
+    <ion-title>
+      Inventario
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <section class="ion-padding">
+    <h5>Catalogo de productos</h5>
+    <ion-row class="ion-justify-content-around">
+      <ion-col *ngFor="let i of items" class="ion-padding" size="5">
+        <h5>{{ i.title }}</h5>
+        <p>Cantidad: {{ i.cantidad }}</p>
+        <h4>${{ i.precio }}</h4>
+      </ion-col>
+    </ion-row>
+  </section>
+</ion-content>

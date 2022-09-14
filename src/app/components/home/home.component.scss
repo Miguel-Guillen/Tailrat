@@ -1,0 +1,25 @@
+.card {
+    width: 90vw;
+    margin: auto;
+}
+.card-container {
+    background-color: #c6d3ff;
+    padding: 30px;
+    margin: 30px 16px;
+    border-radius: 20px;
+    border: solid 1px #666;
+}
+ion-content h4, .card h5, .card h3, .card h2 {
+    font-weight: bold;
+}
+.card h2 {
+    color: #2a60b9;
+    margin: 20px 0 16px;
+    text-align: center;
+}
+.card ion-button {
+    --border-radius: 20px;
+}
+.card ul li {
+    margin: 10px 0;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Tailrat",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
