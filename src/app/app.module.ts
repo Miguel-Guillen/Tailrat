@@ -6,6 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { HomeComponent } from './components/home/home.component';
@@ -18,7 +19,13 @@ import { LoginComponent } from './components/shared/login/login.component';
     HomeComponent,
     LoginComponent
   ],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

@@ -11,18 +11,41 @@
 
 <ion-content>
   <div class="container">
-    <nav class="sidemenu">
-      <form>
+    <nav class="sidemenu shadow">
+      <form [formGroup]="forms" (ngSubmit)="login(forms.value)">
         <div class="row">
-          <h3>Iniciar sesion</h3>
           <div class="col-12">
-            <input class="form-control" type="email">
+            <h3 class="text-center">Login</h3>
+            <div *ngIf="formValid === false" class="alert alert-danger mt-4 mb-2" role="alert">
+              Correo o contraseña incorrecto
+            </div>
           </div>
-          <div class="col-12">
-            <input class="form-control" type="password">
+          <div class="col-12 my-3">
+            <label class="form-label">Correo</label>
+            <input formControlName="email" class="form-control" type="email">
+            <span class="text-danger" *ngIf="mail?.errors?.required && (mail.dirty || mail.touched
+            || formValid === false)">
+              Correo requerido
+            </span>
+            <span class="text-danger" *ngIf="mail?.hasError('pattern') && (mail.dirty || mail.touched
+            || formValid === false)">
+              Tipo de correo invalido
+            </span>
           </div>
-          <button class="btn btn-login">Enviar</button>
+          <div class="col-12 mb-2">
+            <label class="form-label">Contraseña</label>
+            <input formControlName="password" class="form-control" type="password">
+            <span class="text-danger" *ngIf="pass?.errors?.required && (pass.dirty || pass.touched
+            || formValid === false)">
+              Contraseña requerida
+            </span>
+            <span class="text-danger" *ngIf="pass.hasError('minlength') && 
+            (pass.dirty || pass.touched || formValid === false)">
+              Contraseña minima de 8 caracteres
+            </span>
+          </div>
         </div>
+        <button class="btn btn-login mt-2 w-100 text-white" type="submit">Enviar</button>
       </form>
     </nav>
   </div>
