@@ -3,12 +3,32 @@ ion-col {
     height: 200px;
     border-radius: 20px;
     margin: 16px 0;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 ion-col h5 {
     color: #073086;
+    font-size: 16px;
 }
 ion-col p, ion-col h5, ion-col h4 {
-    margin: 10px 0;
+    margin: 6px 0;
+}
+ion-col h4 {
+    font-weight: bold;
+}
+ion-col img {
+    border-radius: 20px;
+    border: #ddd solid 1px;
+}
+
+ion-modal ion-label {
+    margin-left: 8px;
+}
+
+.menu-buttons {
+    display: flex;
+    justify-content: end;
+}
+.menu-buttons ion-label {
+    margin-left: 8px;
 }

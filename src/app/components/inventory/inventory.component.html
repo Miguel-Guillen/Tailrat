@@ -11,13 +11,46 @@
  
 <ion-content>
   <section class="ion-padding">
+    <div class="menu-buttons">
+      <ion-button (click)="isModalOpen = true">
+        <ion-icon name="add"></ion-icon>
+        <ion-label>Nuevo</ion-label>
+      </ion-button>
+    </div>
+
     <h5>Catalogo de productos</h5>
     <ion-row class="ion-justify-content-around">
       <ion-col *ngFor="let i of items" class="ion-padding" size="5">
+        <img src="../../../assets/img/png-transparent-computer-icons-new-product-development-service-window-others-miscellaneous-service-window.png" alt="">
         <h5>{{ i.title }}</h5>
         <p>Cantidad: {{ i.cantidad }}</p>
         <h4>${{ i.precio }}</h4>
       </ion-col>
     </ion-row>
   </section>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="isModalOpen = false">
+              <ion-icon name="arrow-undo"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>Nuevo producto</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalOpen = false" [strong]="true">
+              <ion-icon name="add-circle"></ion-icon>
+              <ion-label>Enviar</ion-label>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>

@@ -44,6 +44,8 @@ export class InventoryComponent implements OnInit {
       ubicacion: 'Estante'
     },
   ]
+  isModalOpen = false;
+  
   constructor() { }
 
   ngOnInit() {

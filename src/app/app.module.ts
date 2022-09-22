@@ -9,12 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/shared/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InventoryComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
