@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,16 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   forms: FormGroup;
   formValid = true;
+  users: Array<any> = [];
 
-  constructor(private formB: FormBuilder, private router: Router) {
+  constructor(private formB: FormBuilder, private router: Router,
+    private toast: ToastrService) {
     this.forms = this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.users = JSON.parse(localStorage.getItem('accounts')) || [];
+  }
 
   createForm(): FormGroup {
     return this.forms = this.formB.group({
@@ -32,12 +37,15 @@ export class LoginComponent implements OnInit {
 
   login(data: any){
     this.formValid = true;
-    if(data.email == 'admin@gmail.com' && data.password == '12345678'){
-      this.router.navigate(['/inventory']);
-    }else {
-      this.formValid = false;
-      console.log(data);
+    for(const user of this.users){
+      if(data.email == user.email && data.password == user.password){
+        this.router.navigate(['/inventory']);
+        this.forms.reset();
+      }
     }
+    this.formValid = false;
+    this.toast.error('Ha ocurrido un error al registrar', ``,
+    { positionClass: 'toast-bottom-right'});
   }
 
   get mail(){

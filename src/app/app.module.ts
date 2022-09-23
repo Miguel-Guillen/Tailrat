@@ -11,13 +11,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/shared/login/login.component';
+import { RegisterComponent } from './components/shared/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InventoryComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule, 

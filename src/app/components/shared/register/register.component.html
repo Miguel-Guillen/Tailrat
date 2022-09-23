@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>     
     <ion-title>
-      Login
+      Registro
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,13 +12,13 @@
 <ion-content>
   <div class="container">
     <nav class="sidemenu shadow">
-      <form [formGroup]="forms" (ngSubmit)="login(forms.value)">
+      <form [formGroup]="forms" (ngSubmit)="register(forms.value)">
         <div class="row">
           <div class="col-12">
-            <h3 class="text-center">Login</h3>
-            <div *ngIf="formValid === false" class="alert alert-danger mt-4 mb-2" role="alert">
+            <h3 class="text-center">Registro</h3>
+            <!-- <div *ngIf="formValid === false" class="alert alert-danger mt-4 mb-2" role="alert">
               Correo o contraseña incorrecto
-            </div>
+            </div> -->
           </div>
           <div class="col-12 my-3">
             <label class="form-label">Correo</label>
@@ -45,10 +45,7 @@
             </span>
           </div>
         </div>
-        <div class="text-center">
-          <button class="btn btn-login my-2 w-100 text-white" type="submit">Enviar</button>
-          <a [routerLink]="['/register']">No tengo una cuenta</a>
-        </div>
+        <button class="btn btn-login mt-2 w-100 text-white" type="submit">Enviar</button>
       </form>
     </nav>
   </div>
