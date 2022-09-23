@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,10 +26,7 @@ import { RegisterComponent } from './components/shared/register/register.compone
     IonicModule.forRoot(), 
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    ToastrModule,
-    ToastNoAnimation,
-    ToastNoAnimationModule.forRoot()
+    ReactiveFormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

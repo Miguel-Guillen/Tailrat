@@ -5,7 +5,14 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  user = new Object;
+  user: any;
 
-  constructor() {}
+  constructor() {
+    this.user = JSON.parse(localStorage.getItem('logged'));
+  }
+
+  logout(){
+    this.user = null;
+    localStorage.removeItem('logged');
+  }
 }

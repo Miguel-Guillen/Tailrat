@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +11,7 @@ export class RegisterComponent implements OnInit {
   forms: FormGroup;
   formValid = true;
 
-  constructor(private formB: FormBuilder, private router: Router,
-    private toast: ToastrService) {
+  constructor(private formB: FormBuilder, private router: Router) {
     this.forms = this.createForm();
   }
 
@@ -43,13 +41,13 @@ export class RegisterComponent implements OnInit {
       }
       users.push(user);
       localStorage.setItem('accounts', JSON.stringify(users));
-      this.toast.success('Registro completado correctamente', ``,
-      { positionClass: 'toast-bottom-right'});
+      // this.toast.success('Registro completado correctamente', ``,
+      // { positionClass: 'toast-bottom-right'});
       this.router.navigate(['/login']);
       this.forms.reset();
     }else {
-      this.toast.error('Ha ocurrido un error al registrar', ``,
-      { positionClass: 'toast-bottom-right'});
+      // this.toast.error('Ha ocurrido un error al registrar', ``,
+      // { positionClass: 'toast-bottom-right'});
     }
   }
 
