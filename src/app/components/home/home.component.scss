@@ -1,25 +1,33 @@
-.card {
+ion-content h4, h5, h3, h2 {
+    font-weight: bold;
+}
+p {
+    font-size: 14px; 
+}
+
+.item {
     width: 90vw;
     margin: auto;
 }
-.card-container {
-    background-color: #c6d3ff;
+.item-container {
+    background-color: #444;
+    color: #eee;
     padding: 30px;
-    margin: 30px 16px;
     border-radius: 20px;
-    border: solid 1px #666;
+    font-size: 14px;
 }
-ion-content h4, .card h5, .card h3, .card h2 {
-    font-weight: bold;
-}
-.card h2 {
-    color: #2a60b9;
+.item-container h2 {
+    color: #367288;
     margin: 20px 0 16px;
     text-align: center;
 }
-.card ion-button {
+.item ion-button {
     --border-radius: 20px;
 }
-.card ul li {
+.item ul li {
     margin: 10px 0;
+}
+
+#products p {
+    margin: 3px 0;
 }
