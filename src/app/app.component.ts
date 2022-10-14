@@ -17,7 +17,7 @@ export class AppComponent {
 
   logout(){
     this.user = new UserAuth;
-    this.auth.isLogout();
+    this.auth.logout();
     this.route.navigate(['/home']);
   }
 }

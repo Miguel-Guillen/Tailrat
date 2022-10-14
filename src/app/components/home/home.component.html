@@ -11,7 +11,7 @@
  
 <ion-content>
   
-  <ng-template *ngIf="user.login === false; else logged">
+  <ng-template *ngIf="user.plan == ''; else logged">
     <div class="ion-padding">
         <h5>Bienvenido a su sistema de inventario</h5>
         <p>Para acceder nuestros servicios consigue nuestros paquetes</p>

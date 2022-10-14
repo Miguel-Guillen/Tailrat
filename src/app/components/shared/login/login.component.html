@@ -23,10 +23,10 @@
           <div class="col-12 my-3">
             <label class="form-label">Correo</label>
             <input formControlName="email" class="form-control" type="email">
-            <span class="text-danger" *ngIf="mail?.errors?.required && (mail.dirty || mail.touched
+            <!-- <span class="text-danger" *ngIf="mail?.errors?.required && (mail.dirty || mail.touched
             || formValid === false)">
               Correo requerido
-            </span>
+            </span> -->
             <span class="text-danger" *ngIf="mail?.hasError('pattern') && (mail.dirty || mail.touched
             || formValid === false)">
               Tipo de correo invalido
@@ -35,10 +35,10 @@
           <div class="col-12 mb-2">
             <label class="form-label">Contraseña</label>
             <input formControlName="password" class="form-control" type="password">
-            <span class="text-danger" *ngIf="pass?.errors?.required && (pass.dirty || pass.touched
+            <!-- <span class="text-danger" *ngIf="pass?.errors?.required && (pass.dirty || pass.touched
             || formValid === false)">
               Contraseña requerida
-            </span>
+            </span> -->
             <span class="text-danger" *ngIf="pass.hasError('minlength') && 
             (pass.dirty || pass.touched || formValid === false)">
               Contraseña minima de 8 caracteres
@@ -46,7 +46,8 @@
           </div>
         </div>
         <div class="text-center">
-          <button class="btn btn-login my-2 w-100 text-white" type="submit">Enviar</button>
+          <button class="btn btn-login my-1 w-100 text-white" type="submit">Enviar</button>
+          <button class="btn btn-danger my-1 w-100 text-white" (click)="loginG()" type="button">Iniciar con Google</button>
           <a [routerLink]="['/register']">No tengo una cuenta</a>
         </div>
       </form>
