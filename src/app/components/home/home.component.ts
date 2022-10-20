@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { UserAuth } from 'src/app/core/models/user-auth';
 import { AuthService } from 'src/app/core/service/auth.service';
 
@@ -14,7 +13,9 @@ export class HomeComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.user = this.auth.isLogged();
+    this.auth.isLogged().subscribe((res: any) => {
+      this.user = res;
+    });
   }
 
 }

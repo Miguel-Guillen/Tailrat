@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { UserService } from 'src/app/core/service/user.service';
 import { AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -79,8 +80,9 @@ export class LoginComponent implements OnInit {
               }
   
               localStorage.setItem('logged', JSON.stringify(user));
+              this._authService.login(user);
               this.reset();
-              this.router.navigate(['/inventory']);
+              this.router.navigate(['/home']);
             }else {
               this._authService.logout();
               this.formValid = false;

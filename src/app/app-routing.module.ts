@@ -4,22 +4,20 @@ import { HomeComponent } from './components/home/home.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { LoginComponent } from './components/shared/login/login.component';
 import { RegisterComponent } from './components/shared/register/register.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { LoginGuard } from './core/guards/login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // {
-  //   path: 'dashboard',
-  //   loadChildren: () => import('./components/shared.module').then( m => m.SharedModule)
-  // }
-  { path: 'home', component: HomeComponent },
-  { path: 'inventory', component: InventoryComponent }
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

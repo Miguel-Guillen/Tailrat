@@ -3,36 +3,45 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserAuth } from '../models/user-auth';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { first } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  user = new UserAuth;
+  // user = new UserAuth;
+  private user$ = new Observable;
 
   constructor(private angularAuth: AngularFireAuth) { }
 
-  isLogged(): UserAuth {
+  isLogged(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('logged'));
-    const firebaseUser = this.angularAuth.authState.pipe(first()).toPromise();
-    if(firebaseUser) return this.user = user == null ? new UserAuth : user;
-    else { this.logout() };
+    this.user$ = new Observable((observer) => {
+      observer.next(user == null ? new UserAuth : user);
+      observer.complete();
+    })
+    return this.user$;
   }
 
   loginWithGoogle(): Promise<any> {
     try {
-      return this.angularAuth.signInWithPopup(new GoogleAuthProvider()).then((res) =>{
-        return res
+      return this.angularAuth.signInWithPopup(new GoogleAuthProvider()).then((res) => {
+        return res;
       });
     }catch(err: any){
       return err;
     }
   }
+
+  login(user: any){
+    this.user$ = new Observable((observer) => {
+      observer.next(user == null ? new UserAuth : user);
+    })
+  }
   
-  logout(): Promise<any>{
+  logout(){
     console.log("cerrando sesion");
     localStorage.removeItem('logged');
-    this.user = new UserAuth;
-    return this.angularAuth.signOut().then();
+    this.angularAuth.signOut().then();
   }
 }

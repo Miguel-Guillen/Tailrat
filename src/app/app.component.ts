@@ -12,12 +12,14 @@ export class AppComponent {
   user = new UserAuth;
 
   constructor(private route: Router, private auth: AuthService) {
-    this.user = this.auth.isLogged();
+    this.auth.isLogged().subscribe((res: any) => {
+      this.user = res;
+    });
   }
 
   logout(){
     this.user = new UserAuth;
     this.auth.logout();
-    this.route.navigate(['/home']);
+    this.route.navigate(['/login']);
   }
 }
