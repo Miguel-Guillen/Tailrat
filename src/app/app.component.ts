@@ -9,17 +9,17 @@ import { AuthService } from './core/service/auth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  user = new UserAuth;
+  // user = new UserAuth;
 
-  constructor(private route: Router, private auth: AuthService) {
-    this.auth.isLogged().subscribe((res: any) => {
-      this.user = res;
-    });
+  constructor() {
+    // this.auth.isLogged().subscribe((res: any) => {
+    //   this.user = res;
+    // });
   }
 
-  logout(){
-    this.user = new UserAuth;
-    this.auth.logout();
-    this.route.navigate(['/login']);
-  }
+  // logout(){
+  //   this.user = new UserAuth;
+  //   this.auth.logout();
+  //   this.route.navigate(['/login']);
+  // }
 }

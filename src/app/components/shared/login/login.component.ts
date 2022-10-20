@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('logged', JSON.stringify(user));
               this._authService.login(user);
               this.reset();
-              this.router.navigate(['/home']);
+              this.router.navigate(['/menu']);
             }else {
               this._authService.logout();
               this.formValid = false;

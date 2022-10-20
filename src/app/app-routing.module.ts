@@ -8,11 +8,16 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { LoginGuard } from './core/guards/login.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] }
+  // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  // { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+  {
+    path: 'menu',
+    loadChildren: () => import('./components/menu/menu.module').then( m => m.MenuPageModule)
+  }
+
 ];
 
 @NgModule({
