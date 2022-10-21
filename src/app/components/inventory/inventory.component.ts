@@ -36,11 +36,38 @@ export class InventoryComponent implements OnInit {
     },
     {
       title: 'Yogurt San Marcos',
-      descripcion: 'Yogurt sabor fresa, 350ml',
+      descripcion: 'Yogurt sabor vainilla, 350ml',
       precio: 15,
       cantidad: 4,
       tipo: 'caja',
       piezas: 18,
+      ubicacion: 'Estante'
+    },
+    {
+      title: 'Crema Lala',
+      descripcion: 'Bote de Crema lala, 500ml',
+      precio: 20,
+      cantidad: 10,
+      tipo: 'pieza',
+      piezas: 1,
+      ubicacion: 'Estante'
+    },
+    {
+      title: 'Crema La consteña',
+      descripcion: 'Bote de Crema Costeña, 500ml',
+      precio: 17,
+      cantidad: 10,
+      tipo: 'caja',
+      piezas: 1,
+      ubicacion: 'Estante'
+    },
+    {
+      title: 'Leche La granja',
+      descripcion: 'Leche la granja, 1L',
+      precio: 16,
+      cantidad: 16,
+      tipo: 'pieza',
+      piezas: 1,
       ubicacion: 'Estante'
     },
   ]

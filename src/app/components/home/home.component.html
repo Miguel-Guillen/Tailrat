@@ -13,14 +13,18 @@
   <div *ngIf="user.plan != ''; else logged">
     <section id="products" class="ion-padding">
       <h4>Productos recientes</h4>
-      <div class="row d-flex justify-content-around mt-4 text-center">
-        <div class="col-5 border rounded bg-light p-2">
-          <p>producto 1</p>
-        </div>
-        <div class="col-5 border rounded bg-light p-2">
-          <p>producto 2</p>
+      <div class="row d-flex justify-content-evenly mt-4 text-center">
+        <div *ngFor="let product of items" class="col-5 border rounded bg-light p-2 mb-2">
+          <img class="img-thumbnail w-75" src="https://thumbs.dreamstime.com/b/icono-de-b%C3%BAsqueda-con-fondo-blanco-perfecto-para-comprar-iconos-productos-171077100.jpg" alt="">
+          <p class="text-secondary">{{ product.title }}</p>
+          <p class="fw-bold">${{ product.precio }}</p>
         </div>
       </div>
+    </section>
+
+    <section class="bg-dark text-white ion-padding mx-4 rounded">
+      <h5>Listado de proveedores</h5>
+      <p>En mantenimiento</p>
     </section>
   </div>
 </ion-content>

@@ -19,9 +19,9 @@
     </div>
 
     <h5>Catalogo de productos</h5>
-    <ion-row class="ion-justify-content-around">
-      <ion-col *ngFor="let i of items" class="ion-padding" size="5">
-        <img src="../../../assets/img/png-transparent-computer-icons-new-product-development-service-window-others-miscellaneous-service-window.png" alt="">
+    <ion-row class="ion-justify-content-evenly">
+      <ion-col *ngFor="let i of items" class="ion-padding text-center" size="5">
+        <img class="img-thumbnail h-50" src="https://thumbs.dreamstime.com/b/icono-de-b%C3%BAsqueda-con-fondo-blanco-perfecto-para-comprar-iconos-productos-171077100.jpg" alt="">
         <h5>{{ i.title }}</h5>
         <p>Cantidad: {{ i.cantidad }}</p>
         <h4>${{ i.precio }}</h4>
