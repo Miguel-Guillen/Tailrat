@@ -21,6 +21,16 @@ export class AuthService {
     return this.user$;
   }
 
+  login(user: any){
+    this.user$ = new Observable((observer) => {
+      observer.next(user == null ? new UserAuth : user);
+    })
+  }
+
+    loginWithEmailAndPass(){
+      return this
+    }
+
   loginWithGoogle(): Promise<any> {
     try {
       return this.angularAuth.signInWithPopup(new GoogleAuthProvider()).then((res) => {
@@ -29,12 +39,6 @@ export class AuthService {
     }catch(err: any){
       return err;
     }
-  }
-
-  login(user: any){
-    this.user$ = new Observable((observer) => {
-      observer.next(user == null ? new UserAuth : user);
-    })
   }
   
   logout(){

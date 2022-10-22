@@ -43,17 +43,23 @@ export class LoginComponent implements OnInit {
 
   login(data: any){
     this.formValid = true;
-    for(const user of this.users){
-      if(data.email == user.email && data.password == user.password){
-        const logged = {
-          id: user.id,
-          email: user.email,
-          token: '*24@e78_!b2d'
-        }
-        localStorage.setItem('logged', JSON.stringify(logged));
-        this.reset();
-        this.router.navigate(['/inventory']);
-      }
+    if(this.forms.valid === true)
+    // for(const user of this.users){
+    //   if(data.email == user.email && data.password == user.password){
+    //     const logged = {
+    //       id: user.id,
+    //       email: user.email,
+    //       token: '*24@e78_!b2d'
+    //     }
+    //     localStorage.setItem('logged', JSON.stringify(logged));
+    //     this.reset();
+    //     this.router.navigate(['/menu']);
+    //   }
+    // }
+    try {
+      
+    }catch(err){
+      
     }
     this.formValid = false;
   }
