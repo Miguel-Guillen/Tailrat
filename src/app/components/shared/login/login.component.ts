@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { UserService } from 'src/app/core/service/user.service';
 import { AlertController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   forms: FormGroup;
   formValid = true;
   users: Array<any> = [];
-  logIn: any;
 
   constructor(private formB: FormBuilder, private router: Router,
     private _authService: AuthService, private _userService: UserService,
@@ -25,7 +24,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.users = JSON.parse(localStorage.getItem('accounts')) || [];
-    this.logIn = JSON.parse(localStorage.getItem('logged')) || {};
   }
 
   createForm(): FormGroup {
@@ -44,23 +42,34 @@ export class LoginComponent implements OnInit {
   login(data: any){
     this.formValid = true;
     if(this.forms.valid === true)
-    // for(const user of this.users){
-    //   if(data.email == user.email && data.password == user.password){
-    //     const logged = {
-    //       id: user.id,
-    //       email: user.email,
-    //       token: '*24@e78_!b2d'
-    //     }
-    //     localStorage.setItem('logged', JSON.stringify(logged));
-    //     this.reset();
-    //     this.router.navigate(['/menu']);
-    //   }
-    // }
-    try {
-      
-    }catch(err){
-      
-    }
+      this._authService.loginWithEmailAndPass(data.email, data.password).then((res: any) => {
+        if(res.uid){
+          this._authService.searchUser(data.email).pipe(take(1)).subscribe((data: any) => {
+            if(data.length > 0){
+              const user = {
+                id: data[0].payload.doc.id,
+                nombre: data[0].payload.doc.data()['nombre'],
+                email: data[0].payload.doc.data()['correo'],
+                plan: data[0].payload.doc.data()['plan'],
+                level: data[0].payload.doc.data()['privilegios'],
+                uid: res.uid
+              }
+              
+              this._authService.login(user);
+              this.reset();
+              this.router.navigate(['/dashboard']);
+            }else {
+              this._authService.logout();
+              this.formValid = false;
+              this.presentAlert();
+            }
+          })
+        }else {
+          this._authService.logout();
+          this.formValid = false;
+          this.presentAlert();
+        }
+      })
     this.formValid = false;
   }
 
@@ -75,20 +84,17 @@ export class LoginComponent implements OnInit {
                 id: response[0].payload.doc.id,
                 ... response[0].payload.doc.data()
               };
-    
               const user = {
                 id: data.id,
                 nombre: res.user.displayName,
                 email: res.user.email,
                 plan: data.plan,
-                token: res.user.refreshToken,
+                level: data.privilegios,
                 uid: res.user.uid
               }
-  
-              localStorage.setItem('logged', JSON.stringify(user));
               this._authService.login(user);
               this.reset();
-              this.router.navigate(['/menu']);
+              this.router.navigate(['/dashboard']);
             }else {
               this._authService.logout();
               this.formValid = false;
@@ -110,7 +116,7 @@ export class LoginComponent implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Error al iniciar sesion',
-      message: 'La cuenta de google no se encuentra registrada',
+      message: 'No se encuentraron cuentas registradas',
       cssClass: 'colors',
       buttons: ['Aceptar'],
     });

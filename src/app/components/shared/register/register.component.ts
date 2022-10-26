@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +13,8 @@ export class RegisterComponent implements OnInit {
   forms: FormGroup;
   formValid = true;
 
-  constructor(private formB: FormBuilder, private router: Router) {
+  constructor(private formB: FormBuilder, private router: Router,
+    private _authService: AuthService, private alertController: AlertController) {
     this.forms = this.createForm();
   }
 
@@ -19,6 +22,12 @@ export class RegisterComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.forms = this.formB.group({
+      names: ['', [
+        Validators.required, 
+      ]],
+      lastnames: ['', [
+        Validators.required, 
+      ]],
       email: ['', [
         Validators.required, 
         Validators.pattern("^[a-zA-Z0-9._%+-/ñ]+@[a-z0-9.-]+\\.[a-z]{2,6}$")
@@ -31,24 +40,56 @@ export class RegisterComponent implements OnInit {
   }
 
   register(data: any){
+    this.formValid = true;
     if(this.forms.valid === true){
-      const users = JSON.parse(localStorage.getItem('accounts')) || [];
-      const date = new Date();
+      const { email, password } = data;
       let user = {
-        id: date.getDay() + '' + date.getFullYear() + users.length,
-        email: data.email,
-        password: data.password
+        nombres: data.names,
+        apellidos: data.lastnames,
+        email: email,
+        plan: '',
+        privilegios: 'usuario'
       }
-      users.push(user);
-      localStorage.setItem('accounts', JSON.stringify(users));
-      // this.toast.success('Registro completado correctamente', ``,
-      // { positionClass: 'toast-bottom-right'});
-      this.router.navigate(['/login']);
-      this.forms.reset();
+
+      this._authService.registerWithEmailAndPass(email, password, user).then(() => {
+        this.alert()
+        this.forms.reset();
+        this.router.navigate(['/login']);
+      });
     }else {
-      // this.toast.error('Ha ocurrido un error al registrar', ``,
-      // { positionClass: 'toast-bottom-right'});
+      this.formValid = false;
+      this.errorAlert();
     }
+  }
+
+  async alert() {
+    const alert = await this.alertController.create({
+      header: 'Usuario registrado',
+      message: 'El usuario ha sido registrado exitosamente',
+      cssClass: 'register-colors',
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+  }
+
+  async errorAlert() {
+    const alert = await this.alertController.create({
+      header: 'Datos incorrectos',
+      message: 'Datos incorrectos o faltantes',
+      cssClass: 'colors',
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+  }
+
+
+
+  get name(){
+    return this.forms.get('names');
+  }
+
+  get lastname(){
+    return this.forms.get('lastnames');
   }
 
   get mail(){

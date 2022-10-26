@@ -18,13 +18,14 @@
       </ion-button>
     </div>
 
-    <h5>Catalogo de productos</h5>
-    <ion-row class="ion-justify-content-evenly">
-      <ion-col *ngFor="let i of items" class="ion-padding text-center" size="5">
-        <img class="img-thumbnail h-50" src="https://thumbs.dreamstime.com/b/icono-de-b%C3%BAsqueda-con-fondo-blanco-perfecto-para-comprar-iconos-productos-171077100.jpg" alt="">
-        <h5>{{ i.title }}</h5>
-        <p>Cantidad: {{ i.cantidad }}</p>
-        <h4>${{ i.precio }}</h4>
+    <h5 class="ms-3">Catalogo de productos</h5>
+    <ion-row *ngIf="products.length > 0;else noProducts" class="ion-justify-content-evenly">
+      <ion-col *ngFor="let product of products" class="ion-padding text-center" size="5">
+        <img *ngIf="product.img == '' " class="img-thumbnail h-50" src="../../../../assets/img/products_blank.jpg" alt="">
+        <img *ngIf="product.img != '' " class="img-thumbnail h-50" src="{{product.img}}" alt="">
+        <h5>{{ product.titulo }}</h5>
+        <p>Cantidad: {{ product.cantidad }}</p>
+        <h4>${{ product.precio }}</h4>
       </ion-col>
     </ion-row>
   </section>
@@ -54,3 +55,9 @@
   </ion-modal>
 
 </ion-content>
+
+<ng-template #noProducts>
+  <div class="row text-center">
+    <h4>No se encontraron productos almacenados!</h4>
+  </div>
+</ng-template>

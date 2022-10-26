@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from '../../components/home/home.component';
-import { InventoryComponent } from '../../components/inventory/inventory.component';
+import { HomeComponent } from './home/home.component';
+import { InventoryComponent } from './inventory/inventory.component';
 import { AuthGuard } from '../../core/guards/auth.guard';
 
 import { MenuPage } from './menu.page';

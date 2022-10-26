@@ -14,13 +14,13 @@
       <ion-content>
         <ion-list>
           <ion-list-header>Control de inventarios</ion-list-header>
-          <ion-menu-toggle *ngIf="user.uid != '';else noShow " auto-hide="false">
+          <ion-menu-toggle *ngIf="user.uid;else noShow " auto-hide="false">
             
-            <ion-item routerDirection="root" [routerLink]="['/menu/home']" lines="none" detail="false">
+            <ion-item routerDirection="root" [routerLink]="['/dashboard/home']" lines="none" detail="false">
               <ion-icon slot="start" md="home-sharp"></ion-icon>
               <ion-label>Inicio</ion-label>
             </ion-item>
-            <ion-item routerDirection="root" [routerLink]="['/menu/inventory']" lines="none" detail="false" 
+            <ion-item routerDirection="root" [routerLink]="['/dashboard/inventory']" lines="none" detail="false" 
             routerLinkActive="selected">
               <ion-icon slot="start" md="newspaper-sharp"></ion-icon>
               <ion-label>Inventario</ion-label>

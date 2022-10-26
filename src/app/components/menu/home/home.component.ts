@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UserAuth } from 'src/app/core/models/user-auth';
 import { AuthService } from 'src/app/core/service/auth.service';
 
@@ -7,16 +8,26 @@ import { AuthService } from 'src/app/core/service/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  user: UserAuth;
+export class HomeComponent implements OnInit, OnDestroy {
+  user = new UserAuth;
   items: Object[] = [];
+  subscription = new Subscription;
+
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.isLogged().subscribe((res: any) => {
+    this.authUser();
+    this.getProducts()
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();    
+  }
+
+  authUser(){
+    this.subscription = this.auth.isLogged().subscribe((res: any) => {
       this.user = res;
     });
-    this.getProducts()
   }
 
   getProducts(){

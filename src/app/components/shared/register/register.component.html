@@ -1,14 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>     
-    <ion-title>
-      Registro
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <div class="container">
     <nav class="sidemenu shadow">
@@ -16,11 +5,27 @@
         <div class="row">
           <div class="col-12">
             <h3 class="text-center">Registro</h3>
-            <!-- <div *ngIf="formValid === false" class="alert alert-danger mt-4 mb-2" role="alert">
+            <div *ngIf="formValid === false" class="alert alert-danger mt-4 mb-2" role="alert">
               Correo o contraseña incorrecto
-            </div> -->
+            </div>
           </div>
-          <div class="col-12 my-3">
+          <div class="col-12 mt-2">
+            <label class="form-label">Nombre</label>
+            <input formControlName="names" class="form-control" type="text">
+            <span class="text-danger" *ngIf="name?.errors?.required && (name.dirty || name.touched
+            || formValid === false)">
+              Nombre requerido
+            </span>
+          </div>
+          <div class="col-12 mt-2">
+            <label class="form-label">Apellidos</label>
+            <input formControlName="lastnames" class="form-control" type="text">
+              <span class="text-danger" *ngIf="lastname?.errors?.required && (lastname.dirty || lastname.touched
+              || formValid === false)">
+                Apellidos requeridos
+              </span>
+          </div>
+          <div class="col-12 mt-2">
             <label class="form-label">Correo</label>
             <input formControlName="email" class="form-control" type="email">
             <span class="text-danger" *ngIf="mail?.errors?.required && (mail.dirty || mail.touched
@@ -30,9 +35,9 @@
             <span class="text-danger" *ngIf="mail?.hasError('pattern') && (mail.dirty || mail.touched
             || formValid === false)">
               Tipo de correo invalido
-            </span>
+            </span> 
           </div>
-          <div class="col-12 mb-2">
+          <div class="col-12 my-2">
             <label class="form-label">Contraseña</label>
             <input formControlName="password" class="form-control" type="password">
             <span class="text-danger" *ngIf="pass?.errors?.required && (pass.dirty || pass.touched

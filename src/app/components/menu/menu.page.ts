@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserAuth } from '../../core/models/user-auth';
 import { AuthService } from '../../core/service/auth.service';
 
@@ -8,21 +9,29 @@ import { AuthService } from '../../core/service/auth.service';
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
-export class MenuPage implements OnInit {
+export class MenuPage implements OnInit, OnDestroy {
   user = new UserAuth;
+  subscription = new Subscription
 
-  constructor(private route: Router, private auth: AuthService) {
-    this.auth.isLogged().subscribe((res: any) => {
+  constructor(private route: Router, private auth: AuthService) {}
+
+  ngOnInit() {
+    this.authUser();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  authUser(){
+    this.subscription = this.auth.isLogged().subscribe((res: any) => {      
       this.user = res;
     });
   }
 
-  ngOnInit() {
-  }
-
   logout(){
-    this.user = new UserAuth;
-    this.auth.logout();
-    this.route.navigate(['/login']);
+    this.auth.logout().then(() => {
+      this.route.navigate(['/login']);
+    });
   }
 }

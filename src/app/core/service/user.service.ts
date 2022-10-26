@@ -17,4 +17,8 @@ export class UserService {
     return this.firestore.collection('usuarios', res => res
     .where('uid', '==', id)).snapshotChanges();
   }
+
+  addUser(data: any): Promise<any> {
+    return this.firestore.collection('usuarios').add(data);
+  }
 }

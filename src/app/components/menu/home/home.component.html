@@ -10,12 +10,12 @@
 </ion-header>
  
 <ion-content>
-  <div *ngIf="user.plan != ''; else logged">
+  <div *ngIf="user.plan != '';else logged">
     <section id="products" class="ion-padding">
       <h4>Productos recientes</h4>
-      <div class="row d-flex justify-content-evenly mt-4 text-center">
+      <div *ngIf="user.level == 'Administrador';else noProducts " class="row d-flex justify-content-evenly mt-4 text-center">
         <div *ngFor="let product of items" class="col-5 border rounded bg-light p-2 mb-2">
-          <img class="img-thumbnail w-75" src="https://thumbs.dreamstime.com/b/icono-de-b%C3%BAsqueda-con-fondo-blanco-perfecto-para-comprar-iconos-productos-171077100.jpg" alt="">
+          <img class="img-thumbnail w-75" src="../../../../assets/img/products_blank.jpg" alt="">
           <p class="text-secondary">{{ product.title }}</p>
           <p class="fw-bold">${{ product.precio }}</p>
         </div>
@@ -72,5 +72,11 @@
         </div>
 
       </section>
+  </div>
+</ng-template>
+
+<ng-template #noProducts>
+  <div class="row text-center">
+    <h4>No hay productos recientemente agregados!</h4>
   </div>
 </ng-template>
