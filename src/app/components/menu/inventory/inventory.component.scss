@@ -1,22 +1,25 @@
 ion-col {
     background-color: #ddd;
-    height: 200px;
+    height: 170px;
+    max-height: 220px;
     border-radius: 20px;
-    margin: 16px 0;
+    margin: 8px;
     font-size: 13px;
 }
 
-ion-col h5 {
-    color: #073086;
+h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+h5, .text-subtitle {
     font-size: 14.5px;
 }
-ion-col h4 {
-    font-size: 19px;
-    font-weight: bold;
+.text-subtitle {
+    color: #073086;
 }
 
 ion-col p, ion-col h5, ion-col h4 {
-    margin: 6px 0;
+    margin: 2px 0;
 }
 ion-col img {
     border-radius: 20px;
@@ -29,7 +32,8 @@ ion-modal ion-label {
 
 .menu-buttons {
     display: flex;
-    justify-content: end;
+    align-items: center;
+    justify-content: space-between;
 }
 .menu-buttons ion-label {
     margin-left: 8px;

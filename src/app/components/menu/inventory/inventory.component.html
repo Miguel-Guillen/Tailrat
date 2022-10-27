@@ -12,18 +12,18 @@
 <ion-content>
   <section class="ion-padding">
     <div class="menu-buttons">
-      <ion-button (click)="isModalOpen = true">
+      <h5 class="ms-3 fw-bold">Catalogo de productos</h5>
+      <ion-button class="float-end" (click)="isModalOpen = true">
         <ion-icon name="add"></ion-icon>
         <ion-label>Nuevo</ion-label>
       </ion-button>
     </div>
 
-    <h5 class="ms-3">Catalogo de productos</h5>
-    <ion-row *ngIf="products.length > 0;else noProducts" class="ion-justify-content-evenly">
-      <ion-col *ngFor="let product of products" class="ion-padding text-center" size="5">
-        <img *ngIf="product.img == '' " class="img-thumbnail h-50" src="../../../../assets/img/products_blank.jpg" alt="">
-        <img *ngIf="product.img != '' " class="img-thumbnail h-50" src="{{product.img}}" alt="">
-        <h5>{{ product.titulo }}</h5>
+    <ion-row *ngIf="products.length > 0;else noProducts" class="my-2 ion-justify-content-evenly">
+      <ion-col *ngFor="let product of products" class="p-2 text-center" size="5">
+        <img *ngIf="product.img == '' " class="img-thumbnail h-50 mb-2" src="../../../../assets/img/products_blank.jpg" alt="">
+        <img *ngIf="product.img != '' " class="img-thumbnail h-50 mb-2" src="{{product.img}}" alt="">
+        <h5 class="text-subtitle">{{ product.titulo }}</h5>
         <p>Cantidad: {{ product.cantidad }}</p>
         <h4>${{ product.precio }}</h4>
       </ion-col>
@@ -39,17 +39,53 @@
               <ion-icon name="arrow-undo"></ion-icon>
             </ion-button>
           </ion-buttons>
-          <ion-title>Nuevo producto</ion-title>
+          <ion-title class="text-subtitle">Nuevo producto</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="isModalOpen = false" [strong]="true">
-              <ion-icon name="add-circle"></ion-icon>
+              <ion-icon name="new"></ion-icon>
               <ion-label>Enviar</ion-label>
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        
+        <div>
+          <form [formGroup]="formInventory" (ngSubmit)="addProduct(formInventory.value)">
+            <div class="row">
+              <div class="col-12">
+                <label class="form-label">Nombre</label>
+                <input class="form-control" formControlName="titulo" type="text">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Descripcion</label>
+                <input class="form-control" formControlName="descripcion" type="text">
+              </div>
+              <div class="col-6">
+                <label class="form-label">Precio</label>
+                <input class="form-control" formControlName="precio" type="number">
+              </div>
+              <div class="col-6">
+                <label class="form-label">Cantidad en inventario</label>
+                <input class="form-control" formControlName="cantidad" type="number">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Piezas por producto</label>
+                <input class="form-control" formControlName="piezas" type="number">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Imagen o Foto</label>
+                <input class="form-control" formControlName="img" type="file">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Proveedor</label>
+                <select class="form-select" formControlName="id_proveedor">
+                  <option *ngFor="let prov of proveedors" [value]="prov">{{ prov }}</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary" type="submit">Enviar</button>
+          </form>
+        </div>
       </ion-content>
     </ng-template>
   </ion-modal>
@@ -57,7 +93,7 @@
 </ion-content>
 
 <ng-template #noProducts>
-  <div class="row text-center">
-    <h4>No se encontraron productos almacenados!</h4>
+  <div class="row text-center mt-4">
+    <h5 class="fw-bold">No se encontraron productos almacenados!</h5>
   </div>
 </ng-template>

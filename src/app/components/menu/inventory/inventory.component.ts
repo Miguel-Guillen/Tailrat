@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UserAuth } from 'src/app/core/models/user-auth';
 import { AuthService } from 'src/app/core/service/auth.service';
@@ -12,10 +13,22 @@ import { ProductService } from 'src/app/core/service/product.service';
 export class InventoryComponent implements OnInit {
   user = new UserAuth;
   subscription = new Subscription;
+  formInventory: FormGroup;
   products: any[] = []
+
   isModalOpen = false;
+  proveedors = [
+    'Seleccionar',
+    'Lala',
+    'San marcos',
+    'La costeña',
+    'La granja'
+  ]
   
-  constructor(private auth: AuthService, private _productService: ProductService) { }
+  constructor(private auth: AuthService, private _productService: ProductService,
+    private formB: FormBuilder) {
+      this.formInventory = this.createForm();
+    }
 
   ngOnInit() {
     this.authUser();
@@ -24,6 +37,18 @@ export class InventoryComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();    
+  }
+
+  createForm(): FormGroup {
+    return this.formInventory = this.formB.group({
+      titulo: ['', Validators.required],
+      descripcion: [''],
+      precio: [0, Validators.required],
+      cantidad: [0],
+      piezas: [0],
+      img: [''],
+      id_proveedor: [this.proveedors[0]]
+    })
   }
   
   authUser(){
@@ -46,4 +71,7 @@ export class InventoryComponent implements OnInit {
     })
   }
 
+  addProduct(data: FormData){
+
+  }
 }
