@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>     
+    <ion-title>
+      Mi perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <section class="ion-padding">
+    <div class="row mt-2">
+      <div class="col-5 d-flex align-items-center">
+        <img class="img-thumbnail" src="https://i.pinimg.com/474x/bc/df/1d/bcdf1dc5c5f2d1b6665f7f3ea8740ec7.jpg" alt="">
+      </div>
+      <div class="col-7 px-3">
+        <h5 class="fw-bold text-primary mb-3">{{ user.nombre }}</h5>
+        <p class="text-secondary fw-bold my-1">Nombre: 
+          <span class="text-dark">{{ user.nombre }} {{ infoUser.apellidos }}</span>
+        </p>
+        <p class="text-secondary fw-bold my-1">Correo: <span class="text-dark">{{ user.email }}</span></p>
+      </div>
+    </div>
+    
+    <div class="row mt-3">
+      <div class="col-11 mx-auto">
+        <p class="text-secondary fw-bold my-1">UID: <span class="text-dark">{{ user.uid }}</span></p>
+        <p class="text-secondary fw-bold my-1">Permisos: <span class="text-dark">{{ infoUser.privilegios }}</span></p>
+        <p class="text-secondary fw-bold my-1">Plan: <span class="text-dark">{{ infoUser.plan }}</span></p>
+      </div>
+      <div class="col-11 mx-auto">
+        <h6>Privilegios y Permisos</h6>
+        <p class="text-secondary fw-bold my-1">Puesto: <span class="text-dark"></span></p>
+        <p class="text-secondary fw-bold my-1">Accesos: <span class="text-dark"></span></p>
+      </div>
+    </div>
+
+  </section>
+</ion-content>

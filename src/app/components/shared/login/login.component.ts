@@ -41,15 +41,15 @@ export class LoginComponent implements OnInit {
 
   login(data: any){
     this.formValid = true;
-    if(this.forms.valid === true)
+    if(this.forms.valid === true){
       this._authService.loginWithEmailAndPass(data.email, data.password).then((res: any) => {
         if(res.uid){
           this._authService.searchUser(data.email).pipe(take(1)).subscribe((data: any) => {
             if(data.length > 0){
               const user = {
                 id: data[0].payload.doc.id,
-                nombre: data[0].payload.doc.data()['nombre'],
-                email: data[0].payload.doc.data()['correo'],
+                nombre: data[0].payload.doc.data()['nombres'],
+                email: data[0].payload.doc.data()['email'],
                 plan: data[0].payload.doc.data()['plan'],
                 level: data[0].payload.doc.data()['privilegios'],
                 uid: res.uid
@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
           this.presentAlert();
         }
       })
+    }
     this.formValid = false;
   }
 

@@ -6,7 +6,7 @@
           <div class="col-12">
             <h3 class="text-center">Registro</h3>
             <div *ngIf="formValid === false" class="alert alert-danger mt-4 mb-2" role="alert">
-              Correo o contraseña incorrecto
+              Datos incompletos o invalidos
             </div>
           </div>
           <div class="col-12 mt-2">
@@ -20,10 +20,10 @@
           <div class="col-12 mt-2">
             <label class="form-label">Apellidos</label>
             <input formControlName="lastnames" class="form-control" type="text">
-              <span class="text-danger" *ngIf="lastname?.errors?.required && (lastname.dirty || lastname.touched
-              || formValid === false)">
-                Apellidos requeridos
-              </span>
+            <span class="text-danger" *ngIf="lastname?.errors?.required && (lastname.dirty || lastname.touched
+            || formValid === false)">
+              Apellidos requeridos
+            </span>
           </div>
           <div class="col-12 mt-2">
             <label class="form-label">Correo</label>

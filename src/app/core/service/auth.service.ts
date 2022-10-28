@@ -4,6 +4,7 @@ import { UserAuth } from '../models/user-auth';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class AuthService {
   private user$ = new BehaviorSubject(new UserAuth);
   private userLogged$ = this.user$.asObservable();
 
-  constructor(private firestore: AngularFirestore, private angularAuth: AngularFireAuth) { }
+  constructor(private firestore: AngularFirestore, private angularAuth: AngularFireAuth,
+    private storage: Storage) {
+      this.storage.create();
+    }
 
   searchUser(email: string): Observable<any>{
     return this.firestore.collection('usuarios', res => res
@@ -21,11 +25,14 @@ export class AuthService {
 
   isLogged(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('logged'));
-    this.user$.next(user == null ? new UserAuth : user);    
+    const userMovil = this.storage.get('logged') || [];
+    // this.user$.next(user != null ? user : new UserAuth);
+    this.user$.next(user != null ? user : userMovil != null ? user : null);
     return this.userLogged$;
   }
 
-  login(user: any){
+  async login(user: any){
+    this.storage.set('logged', user);
     localStorage.setItem('logged', JSON.stringify(user));
     this.user$.next(user);
     return this.userLogged$;
@@ -51,7 +58,7 @@ export class AuthService {
   
   logout(): Promise<any> {
     localStorage.removeItem('logged');
-    this.login(new UserAuth);
+    this.storage.remove('logged');
     return this.angularAuth.signOut().then();
   }
 

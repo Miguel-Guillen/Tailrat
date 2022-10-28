@@ -1,7 +1,7 @@
 ion-col {
     background-color: #ddd;
-    height: 170px;
-    max-height: 220px;
+    height: 190px;
+    max-height: 190px;
     border-radius: 20px;
     margin: 8px;
     font-size: 13px;
@@ -37,4 +37,8 @@ ion-modal ion-label {
 }
 .menu-buttons ion-label {
     margin-left: 8px;
+}
+.img-size {
+    width: auto;
+    max-height: 100px;
 }

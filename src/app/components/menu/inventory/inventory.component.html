@@ -20,62 +20,105 @@
     </div>
 
     <ion-row *ngIf="products.length > 0;else noProducts" class="my-2 ion-justify-content-evenly">
-      <ion-col *ngFor="let product of products" class="p-2 text-center" size="5">
-        <img *ngIf="product.img == '' " class="img-thumbnail h-50 mb-2" src="../../../../assets/img/products_blank.jpg" alt="">
-        <img *ngIf="product.img != '' " class="img-thumbnail h-50 mb-2" src="{{product.img}}" alt="">
-        <h5 class="text-subtitle">{{ product.titulo }}</h5>
-        <p>Cantidad: {{ product.cantidad }}</p>
-        <h4>${{ product.precio }}</h4>
+      <ion-col *ngFor="let product of products" class="p-2 text-center" size="5" (click)="modalUD(product)">
+        <div>
+          <img *ngIf="product.img == '' " class="img-thumbnail img-size mb-2" src="../../../../assets/img/products_blank.jpg" alt="">
+          <img *ngIf="product.img != '' " class="img-thumbnail img-size mb-1" src="{{product.img}}" alt="">
+          <h5 class="text-subtitle">{{ product.titulo }}</h5>
+          <p>Cantidad: {{ product.cantidad }}</p>
+          <h4>${{ product.precio | number : '1.2-2'  }}</h4>
+        </div>
       </ion-col>
     </ion-row>
   </section>
 
+  <!-- Modal register/update product -->
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="isModalOpen = false">
+            <ion-button (click)="reset(); isModalOpen = false">
               <ion-icon name="arrow-undo"></ion-icon>
             </ion-button>
           </ion-buttons>
-          <ion-title class="text-subtitle">Nuevo producto</ion-title>
+          <ion-title class="fw-bold">Nuevo producto</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="isModalOpen = false" [strong]="true">
-              <ion-icon name="new"></ion-icon>
+            <ion-button (click)="addProduct(formInventory.value)" [strong]="true">
               <ion-label>Enviar</ion-label>
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <div>
+        <div class="p-3">
           <form [formGroup]="formInventory" (ngSubmit)="addProduct(formInventory.value)">
-            <div class="row">
+            <div *ngIf="isSelected === true" class="row mb-2">
               <div class="col-12">
-                <label class="form-label">Nombre</label>
-                <input class="form-control" formControlName="titulo" type="text">
+                <button class="btn btn-outline-danger float-end" (click)="deleteProduct()">
+                  Borrar <ion-icon name="trash"></ion-icon>
+                </button>
               </div>
+            </div>
+            <div *ngIf="formValid === false" class="alert alert-danger mt-2" role="alert">
+              Datos incompletos o invalidos
+            </div>
+            <div class="row mb-3">
+              <div class="col-12">
+                <label class="form-label">Nombre del producto</label>
+                <input class="form-control" formControlName="titulo" type="text">
+                <span class="text-danger" *ngIf="title?.errors?.required && (title.dirty || title.touched
+                || formValid === false)">
+                  Titulo o nombre del articulo requerido
+                </span>
+              </div>
+            </div>
+            <div class="row mb-2">
               <div class="col-12">
                 <label class="form-label">Descripcion</label>
                 <input class="form-control" formControlName="descripcion" type="text">
               </div>
+            </div>
+            <div class="row mb-2">
               <div class="col-6">
                 <label class="form-label">Precio</label>
                 <input class="form-control" formControlName="precio" type="number">
+                <span class="text-danger" *ngIf="cost?.errors?.min && (cost.dirty || cost.touched
+                  || formValid === false)">
+                  Precio requerido
+                </span>
               </div>
               <div class="col-6">
-                <label class="form-label">Cantidad en inventario</label>
+                <label class="form-label">Cantidad en bodega</label>
                 <input class="form-control" formControlName="cantidad" type="number">
               </div>
+            </div>
+            <div class="row mb-2">
               <div class="col-12">
-                <label class="form-label">Piezas por producto</label>
+                <label class="form-label">Piezas por articulo</label>
                 <input class="form-control" formControlName="piezas" type="number">
               </div>
+            </div>
+            <div class="row mb-3">
               <div class="col-12">
                 <label class="form-label">Imagen o Foto</label>
-                <input class="form-control" formControlName="img" type="file">
+                <div *ngIf="preview" class="text-center mt-2 mb-3">
+                  <img class="img-thumbnail w-50" [src]="preview" alt="">
+                </div>
+                <input class="form-control" (change)="appendArchive($event)" type="file">
+                
+                <!-- <ion-thumbnail *ngIf="preview" slot="start">
+                  <ion-img [src]="preview"></ion-img>
+                </ion-thumbnail> -->
+
+                <button class="w-100 btn btn-outline-secondary mt-3" (click)="takePhoto()"
+                type="button">Tomar Foto</button>
+                <!-- <img [src]="image" alt=""> -->
+                <!-- <p>{{ preview }}</p>
+                <p> {{ image }}</p> -->
               </div>
+            </div>
+            <div class="row">
               <div class="col-12">
                 <label class="form-label">Proveedor</label>
                 <select class="form-select" formControlName="id_proveedor">
@@ -83,7 +126,13 @@
                 </select>
               </div>
             </div>
-            <button class="btn btn-outline-primary" type="submit">Enviar</button>
+            <div class="mt-3">
+              <ion-button shape="round" color="tertiary" class="float-end" type="submit">
+                <ion-spinner *ngIf="loading === true" name="crescent"></ion-spinner>                
+                <span *ngIf="loading === false">Enviar</span>
+              </ion-button>
+              <ion-button [disable]="loading" shape="round" color="medium" (click)="reset()" type="button">Limpiar</ion-button>
+            </div>
           </form>
         </div>
       </ion-content>

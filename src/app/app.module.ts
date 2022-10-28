@@ -7,10 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/shared/login/login.component';
 import { RegisterComponent } from './components/shared/register/register.component';
+import { UsuarioComponent } from './components/shared/usuario/usuario.component';
+
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
 import { environment } from 'src/environments/environment';
 
@@ -18,7 +23,8 @@ import { environment } from 'src/environments/environment';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule, 
@@ -28,9 +34,13 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebase),
+    IonicStorageModule.forRoot()
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    Camera,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
