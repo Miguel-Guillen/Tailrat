@@ -11,17 +11,25 @@ export class ProductService {
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
-  getProductsById(uid: string): Observable<any> {
+  getProductsByUid(uid: string): Observable<any> {
     return this.firestore.collection('productos', ref => ref
     .where('uid', '==', uid)).snapshotChanges();
+  }
+
+  getProductById(id: string): Observable<any> {
+    return this.firestore.collection('productos').doc(id).snapshotChanges();
   }
 
   addProduct(product: any): Promise<any> {
     return this.firestore.collection('productos').add(product);
   }
-
+  
   updateProduct(id: string, product: any): Promise<any> {
     return this.firestore.collection('productos').doc(id).update(product);
+  }
+
+  deleteProduct(id: string): Promise<any> {
+    return this.firestore.collection('productos').doc(id).delete();
   }
 
   uploadImage(file: any, product: any): Observable<any> {

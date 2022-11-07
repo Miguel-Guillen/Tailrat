@@ -1,0 +1,29 @@
+h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+h5, .text-subtitle {
+    font-size: 15px;
+    font-weight: bold;
+}
+.text-subtitle {
+    color: #073086;
+}
+p, span, .btn, ion-label, input, select {
+    font-size: 13px !important;
+}
+label {
+    font-size: 14px !important;
+}
+p, span, h4, h5 {
+    margin: 2px 0;
+}
+
+ion-label {
+    margin: 1px 0;
+}
+ion-item {
+    --background: #f3f3f5;
+    --color: #333;
+    border-radius: 10px;
+}

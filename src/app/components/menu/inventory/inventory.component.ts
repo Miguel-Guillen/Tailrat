@@ -38,7 +38,7 @@ export class InventoryComponent implements OnInit {
   
   constructor(private auth: AuthService, private _productService: ProductService,
     private formB: FormBuilder, private alertController: AlertController,
-    private camera: Camera, private plt: Platform) {
+    private camera: Camera) {
       this.formInventory = this.createForm();
     }
 
@@ -56,7 +56,6 @@ export class InventoryComponent implements OnInit {
       titulo: ['', Validators.required],
       descripcion: [''],
       precio: [0, Validators.min(3)],
-      cantidad: [1],
       piezas: [1],
       img: [''],
       id_proveedor: [this.proveedors[0]]
@@ -70,7 +69,7 @@ export class InventoryComponent implements OnInit {
   }
 
   getProducts(){
-    const subs1 = this._productService.getProductsById(this.user.uid).subscribe((res: any) => {
+    const subs1 = this._productService.getProductsByUid(this.user.uid).subscribe((res: any) => {
       this.products = [];
       if(res.length > 0){
         res.forEach((product: any) => {
@@ -131,7 +130,6 @@ export class InventoryComponent implements OnInit {
       titulo: product.titulo,
       descripcion: product.descripcion,
       precio: product.precio,
-      cantidad: product.cantidad,
       piezas: product.piezas,
       img: '',
       id_proveedor: product.id_proveedor
@@ -139,14 +137,38 @@ export class InventoryComponent implements OnInit {
     this.isModalOpen = true;
   }
 
-  deleteProduct(){
+  async deleteProduct(){
+    const alert = await this.alertController.create({
+      header: '¿Esta seguro de eliminar el producto!?',
+      message: 'Esta accion es irreversible',
+      cssClass: 'delete-colors',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Aceptar',
+          role: 'confirm',
+          handler: () => {
+            this._productService.deleteProduct(this.id).then(() => {
+              this.deleteAlert();
+              this.reset()
+              this.isModalOpen = false;
+            })
+          }
+        },
+      ],
+    });
     
+    await alert.present();
   }
 
   async takePhoto(){
     let options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.CAMERA
@@ -155,9 +177,8 @@ export class InventoryComponent implements OnInit {
     await this.camera.getPicture(options).then((imageData) => {
       if(imageData){
         this.image = imageData;
-        this.preview = this.imgBase64(this.image);
+        this.preview = 'data:image/jpeg;base64,' + imageData;
       }
-      // this.preview = 'data:image/jpeg;base64,' + imageData;
      }, (err) => {
       console.log(err);
      });
@@ -217,6 +238,16 @@ export class InventoryComponent implements OnInit {
     await alert.present();
   }
 
+  async deleteAlert() {
+    const alert = await this.alertController.create({
+      header: 'Producto eliminado',
+      message: 'El producto fue eliminado correctamente',
+      cssClass: 'register-colors',
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+  }
+
   get title(){
     return this.formInventory.get('titulo');
   }
@@ -230,5 +261,6 @@ export class InventoryComponent implements OnInit {
     this.id = '';
     this.image = null;
     this.preview = null
+    this.isSelected = false;
   }
 }

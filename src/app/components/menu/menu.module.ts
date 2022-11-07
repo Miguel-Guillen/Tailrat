@@ -7,6 +7,8 @@ import { MenuPageRoutingModule } from './menu-routing.module';
 import { MenuPage } from './menu.page';
 import { HomeComponent } from './home/home.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { StorageComponent } from './storage/storage.component';
+import { StorageItemComponent } from './storage-item/storage-item.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ import { InventoryComponent } from './inventory/inventory.component';
   declarations: [
     MenuPage,
     HomeComponent,
-    InventoryComponent
+    InventoryComponent,
+    StorageComponent,
+    StorageItemComponent
   ]
 })
 export class MenuPageModule {}

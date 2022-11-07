@@ -70,3 +70,26 @@ ion-content {
         color: #fff;
     }
 }
+
+.delete-colors {
+    .alert-title {
+        color: crimson;
+    }
+    .alert-message {
+        color: #565;
+    }
+    .alert-wrapper {
+        background: #fff;
+        background-color: #fff;
+    }
+    .alert-button.alert-button-role-cancel {
+        background-color: #232;
+        border-radius: 10px;
+        color: #fff;
+    }
+    .alert-button.alert-button-role-confirm {
+        background-color: crimson;
+        border-radius: 10px;
+        color: #fff;
+    }
+}

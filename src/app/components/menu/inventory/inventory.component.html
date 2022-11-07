@@ -25,7 +25,7 @@
           <img *ngIf="product.img == '' " class="img-thumbnail img-size mb-2" src="../../../../assets/img/products_blank.jpg" alt="">
           <img *ngIf="product.img != '' " class="img-thumbnail img-size mb-1" src="{{product.img}}" alt="">
           <h5 class="text-subtitle">{{ product.titulo }}</h5>
-          <p>Cantidad: {{ product.cantidad }}</p>
+          <p>Piezas: {{ product.piezas }}</p>
           <h4>${{ product.precio | number : '1.2-2'  }}</h4>
         </div>
       </ion-col>
@@ -42,7 +42,8 @@
               <ion-icon name="arrow-undo"></ion-icon>
             </ion-button>
           </ion-buttons>
-          <ion-title class="fw-bold">Nuevo producto</ion-title>
+          <ion-title *ngIf="isSelected === false" class="fw-bold">Nuevo producto</ion-title>
+          <ion-title *ngIf="isSelected === true" class="fw-bold">Modificando producto</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="addProduct(formInventory.value)" [strong]="true">
               <ion-label>Enviar</ion-label>
@@ -55,7 +56,8 @@
           <form [formGroup]="formInventory" (ngSubmit)="addProduct(formInventory.value)">
             <div *ngIf="isSelected === true" class="row mb-2">
               <div class="col-12">
-                <button class="btn btn-outline-danger float-end" (click)="deleteProduct()">
+                <h5 class="d-inline text-subtitle fw-bold">Ingrese los nuevos valores</h5>
+                <button class="btn btn-outline-danger float-end" (click)="deleteProduct()" type="button">
                   Borrar <ion-icon name="trash"></ion-icon>
                 </button>
               </div>
@@ -89,12 +91,6 @@
                 </span>
               </div>
               <div class="col-6">
-                <label class="form-label">Cantidad en bodega</label>
-                <input class="form-control" formControlName="cantidad" type="number">
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-12">
                 <label class="form-label">Piezas por articulo</label>
                 <input class="form-control" formControlName="piezas" type="number">
               </div>
@@ -106,16 +102,9 @@
                   <img class="img-thumbnail w-50" [src]="preview" alt="">
                 </div>
                 <input class="form-control" (change)="appendArchive($event)" type="file">
-                
-                <!-- <ion-thumbnail *ngIf="preview" slot="start">
-                  <ion-img [src]="preview"></ion-img>
-                </ion-thumbnail> -->
-
                 <button class="w-100 btn btn-outline-secondary mt-3" (click)="takePhoto()"
                 type="button">Tomar Foto</button>
-                <!-- <img [src]="image" alt=""> -->
-                <!-- <p>{{ preview }}</p>
-                <p> {{ image }}</p> -->
+                <img [src]="image" alt="">
               </div>
             </div>
             <div class="row">
@@ -131,7 +120,7 @@
                 <ion-spinner *ngIf="loading === true" name="crescent"></ion-spinner>                
                 <span *ngIf="loading === false">Enviar</span>
               </ion-button>
-              <ion-button [disable]="loading" shape="round" color="medium" (click)="reset()" type="button">Limpiar</ion-button>
+              <ion-button [disabled]="loading" shape="round" color="medium" (click)="reset()" type="button">Limpiar</ion-button>
             </div>
           </form>
         </div>
