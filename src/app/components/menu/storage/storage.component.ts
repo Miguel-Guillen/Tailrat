@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/core/service/storage.service';
 import { ProductService } from 'src/app/core/service/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonSlides } from '@ionic/angular';
+import { ActionSheetController, AlertController, IonSlides } from '@ionic/angular';
 
 import { UserAuth } from 'src/app/core/models/user-auth';
 import { AuthService } from 'src/app/core/service/auth.service';
@@ -40,9 +40,15 @@ export class StorageComponent implements OnInit {
     'La granja'
   ]
   
-  constructor(private auth: AuthService, private _serviceStorage: StorageService,
-    private _serviceProducts: ProductService, private formB: FormBuilder,
-    private alertController: AlertController, private router: Router) {
+  constructor(
+    private auth: AuthService, 
+    private _serviceStorage: StorageService,
+    private _serviceProducts: ProductService, 
+    private formB: FormBuilder,
+    private alertController: AlertController, 
+    private router: Router,
+    private sheet: ActionSheetController,
+    ) {
     this.forms = this.createForm();
   }
 
@@ -100,7 +106,6 @@ export class StorageComponent implements OnInit {
 
   newStorage(data: any){
     this.formValid = true;
-
     if(this.forms.valid === true){
       this.loading = true;
       const inventory = {
@@ -122,6 +127,32 @@ export class StorageComponent implements OnInit {
 
   changeSlide(slide: number){
     this.slides.slideTo(slide, 400);
+  }
+
+  async actionSheet() {
+    const actionSheet = await this.sheet.create({
+      header: 'Registro de inventario',
+      cssClass: 'sheet-colors',
+      buttons: [
+        {
+          text: 'Crear nuevo registro de inventario',
+          role: 'destructive',
+          data: { action: 'delete' },
+          handler: () => this.isModalOpen = true
+        },
+        {
+          text: 'Registrar por metodo de barras',
+          data: { action: 'share' }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          data: { action: 'cancel' },
+        },
+      ],
+    });
+
+    await actionSheet.present();
   }
 
   async errorAlert() {

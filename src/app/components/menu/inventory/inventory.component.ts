@@ -96,13 +96,23 @@ export class InventoryComponent implements OnInit {
 
       if(this.isSelected === false){
         if(this.preview){
-          this._productService.uploadImage(this.image, product).subscribe((res: any) => {
-            if(res == 100){
-              this.loading = false
-              this.reset();
-              this.isModalOpen = false;
-            }
-          })
+          if(this.image.name){
+            this._productService.uploadImage(this.image, product).subscribe((res: any) => {
+              if(res == 100){
+                this.loading = false
+                this.reset();
+                this.isModalOpen = false;
+              }
+            })
+          }else {
+            this._productService.uploadBase64(this.image, product).subscribe((res: any) => {
+              if(res == 100){
+                this.loading = false
+                this.reset();
+                this.isModalOpen = false;
+              }
+            })
+          }
         }else {
           this._productService.addProduct(product).then(() => {
             this.loading = false
@@ -176,8 +186,8 @@ export class InventoryComponent implements OnInit {
 
     await this.camera.getPicture(options).then((imageData) => {
       if(imageData){
-        this.image = imageData;
         this.preview = 'data:image/jpeg;base64,' + imageData;
+        this.image = this.preview;
       }
      }, (err) => {
       console.log(err);

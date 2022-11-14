@@ -36,16 +36,26 @@
       </section>
     </ion-slide>
     <ion-slide class="ion-padding">
-      <h1>Slide 2</h1>
+      <div *ngIf="user.plan == '' " class="row text-start">
+        <h1>Seccion no disponible!</h1>
+        <p>Para obtener esta seccion se requiere de un plan tipo 
+          <a [routerLink]="['/dashboard/plan']">Empresario</a>
+        </p>
+      </div>
     </ion-slide>
     <ion-slide class="ion-padding">
-      <h1>Slide 3</h1>
+      <div *ngIf="user.plan == '' " class="row text-start">
+        <h1>Seccion no disponible!</h1>
+        <p>Para obtener esta seccion se requiere de un plan tipo
+          <a [routerLink]="['/dashboard/plan']">Premium</a>
+        </p>
+      </div>
     </ion-slide>
   </ion-slides>
   
   <ion-tabs>
     <ion-tab-bar slot="bottom">
-      <ion-tab-button (click)="isModalOpen = true; changeSlide(0)">
+      <ion-tab-button (click)="actionSheet(); changeSlide(0)">
         <ion-icon md="calculator-outline"></ion-icon>
         <ion-label>Inventario</ion-label>
       </ion-tab-button>
@@ -55,7 +65,7 @@
       </ion-tab-button>
       <ion-tab-button (click)="changeSlide(2)">
         <ion-icon name="information-circle"></ion-icon>
-        <ion-label>Mantenimiento</ion-label>
+        <ion-label>Graficos</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

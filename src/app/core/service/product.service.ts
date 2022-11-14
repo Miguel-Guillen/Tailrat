@@ -54,4 +54,25 @@ export class ProductService {
     }
   }
 
+  uploadBase64(file: any, product: any): Observable<any> {
+    if(file){
+      const date = new Date().getTime();
+      const path = `IMAGENES-PRODUCTOS/${date}`;
+      const storageRef = this.storage.ref(path);
+      const upload = this.storage.upload(path, file);
+  
+      upload.snapshotChanges().pipe(
+        finalize(() => {
+          storageRef.getDownloadURL().subscribe(downloadURL => {
+            product.img = downloadURL;
+            this.addProduct(product);
+          });
+        })
+      ).subscribe();
+      return upload.percentageChanges();
+    }else {
+      product.img = '';
+      this.addProduct(product);
+    }
+  }
 }

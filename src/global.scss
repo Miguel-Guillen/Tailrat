@@ -30,6 +30,11 @@ ion-content {
     --color: #111;
 }
 
+ion-modal ion-button {
+    font-size: 13px;
+    text-transform: none !important;
+}
+
 .split-pane-visible > .split-pane-side {
     min-width: 250px !important;
     max-width: 250px !important;
@@ -91,5 +96,32 @@ ion-content {
         background-color: crimson;
         border-radius: 10px;
         color: #fff;
+    }
+}
+
+ion-action-sheet.sheet-colors {
+    --background: #fff;
+    --backdrop-opacity: 0.6;
+    --color: #073086;
+
+    .action-sheet-title {
+        color: #555 !important;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .action-sheet-button {
+        background-color: #073086;
+        margin: 7px auto;
+        width: 95%;
+        border-radius: 16px;
+    }
+
+    .action-sheet-cancel {
+        background-color: crimson;
+        margin: 6px auto;
+        width: 95%;
+        border-radius: 16px;
     }
 }

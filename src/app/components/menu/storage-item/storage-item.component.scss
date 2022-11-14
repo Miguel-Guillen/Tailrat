@@ -18,6 +18,18 @@ label {
 p, span, h4, h5 {
     margin: 2px 0;
 }
+.sheet ion-button {
+    font-size: 13px;
+    text-transform: none !important;
+}
+
+.img-container {
+    max-height: 120px;
+
+    img {
+        height: 100%;
+    }
+}
 
 ion-label {
     margin: 1px 0;

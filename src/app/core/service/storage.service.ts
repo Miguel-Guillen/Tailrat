@@ -22,4 +22,8 @@ export class StorageService {
   addRegister(inventory: any): Promise<any> {
     return this.firestore.collection('almacen').add(inventory);
   }
+
+  updateRegister(id: string, inventory: any): Promise<any> {
+    return this.firestore.collection('almacen').doc(id).update(inventory);
+  }
 }
