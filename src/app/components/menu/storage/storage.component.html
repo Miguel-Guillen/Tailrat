@@ -36,15 +36,36 @@
       </section>
     </ion-slide>
     <ion-slide class="ion-padding">
-      <div *ngIf="user.plan == '' " class="row text-start">
-        <h1>Seccion no disponible!</h1>
-        <p>Para obtener esta seccion se requiere de un plan tipo 
-          <a [routerLink]="['/dashboard/plan']">Empresario</a>
-        </p>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center mb-3 px-3">
+          <span class="text-subtitle">Listado de Proveedores</span>
+          <ion-button class="p-button" color="success">Nuevo</ion-button>
+        </div>
+  
+        <div *ngIf="user.plan == '' " class="row text-start">
+          <h1>Seccion no disponible!</h1>
+          <p>Para obtener esta seccion se requiere de un plan tipo 
+            <a [routerLink]="['/dashboard/plan']">Empresario</a>
+          </p>
+        </div>
+        
+        <div *ngIf="user.plan != '' ">
+          <div *ngIf="proveedors.length > 0; else noProveedors" class="col-12">
+            <ion-item *ngFor="let prove of proveedors" class="mb-2" button="true">
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+              </ion-thumbnail>
+              <ion-label>
+                <p class="text-subtitle my-1">Proveedor: {{ prove.nombre }}</p>
+                <p class="my-1">Empresa: {{ prove.empresa }}</p>
+              </ion-label>
+            </ion-item>
+          </div>
+        </div>
       </div>
     </ion-slide>
     <ion-slide class="ion-padding">
-      <div *ngIf="user.plan == '' " class="row text-start">
+      <div *ngIf="user.plan == '' || user.plan == 'A' " class="row text-start">
         <h1>Seccion no disponible!</h1>
         <p>Para obtener esta seccion se requiere de un plan tipo
           <a [routerLink]="['/dashboard/plan']">Premium</a>
@@ -122,6 +143,7 @@
               <div class="col-12">
                 <label class="form-label">Proveedor</label>
                 <select class="form-select" formControlName="proveedor">
+                  <option value="Seleccionar">Seleccionar</option>
                   <option *ngFor="let prov of proveedors" [value]="prov">{{ prov }}</option>
                 </select>
               </div>
@@ -144,4 +166,9 @@
 <ng-template #noProducts>
   <p class="my-1">No se encontro ningun registro o inventario realizado.</p>
   <p class="my-1">Para visualizar sus datos favor de realizar un conteo de inventario.</p>
+</ng-template>
+
+<ng-template #noProveedors>
+  <p class="my-1">No se encontro ningun proveedor registrado.</p>
+  <p class="my-1">Para registrar un proveedor hacer clic en <span class="text-success">Nuevo</span></p>
 </ng-template>

@@ -33,11 +33,18 @@ export class StorageComponent implements OnInit {
   };
 
   proveedors = [
-    'Seleccionar',
-    'Lala',
-    'San marcos',
-    'La costeña',
-    'La granja'
+    {
+      nombre: 'Lala',
+      empresa: 'Grupo Lala, S.A.B. de C.V.'
+    },
+    {
+      nombre: 'San Marcos',
+      empresa: 'Interpec San Marcos S.A.'
+    },
+    {
+      nombre: 'La Granja',
+      empresa: 'Alimentos de la Granja S.A.'
+    }
   ]
   
   constructor(
