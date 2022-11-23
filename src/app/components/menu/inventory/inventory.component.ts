@@ -266,11 +266,12 @@ export class InventoryComponent implements OnInit {
   }
 
   reset(){
-    this.formInventory.reset();
+    this.formInventory = this.createForm();
     this.formValid = true;
     this.id = '';
     this.image = null;
     this.preview = null
     this.isSelected = false;
+    this.isModalOpen = false;
   }
 }

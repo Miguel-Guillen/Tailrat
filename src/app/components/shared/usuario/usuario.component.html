@@ -11,14 +11,17 @@
  
 <ion-content>
   <section class="ion-padding">
-    <div class="row mt-2">
-      <div class="col-5 d-flex align-items-center">
+    <div class="row d-flex justify-content-evenly mt-2">
+      <div class="col-4 d-flex align-items-center">
         <img class="img-thumbnail" src="https://i.pinimg.com/474x/bc/df/1d/bcdf1dc5c5f2d1b6665f7f3ea8740ec7.jpg" alt="">
       </div>
       <div class="col-7 px-3">
-        <h5 class="fw-bold text-primary mb-3">{{ user.nombre }}</h5>
+        <h5 class="fw-bold text-success mb-2">{{ user.nombre }}</h5>
         <p class="text-secondary fw-bold my-1">Nombre: 
-          <span class="text-dark">{{ user.nombre }} {{ infoUser.apellidos }}</span>
+          <span class="text-dark">{{ user.nombre }}</span>
+        </p>
+        <p class="text-secondary fw-bold my-1">Apellidos: 
+          <span class="text-dark">{{ infoUser.apellidos }}</span>
         </p>
         <p class="text-secondary fw-bold my-1">Correo: <span class="text-dark">{{ user.email }}</span></p>
       </div>
@@ -28,12 +31,22 @@
       <div class="col-11 mx-auto">
         <p class="text-secondary fw-bold my-1">UID: <span class="text-dark">{{ user.uid }}</span></p>
         <p class="text-secondary fw-bold my-1">Permisos: <span class="text-dark">{{ infoUser.privilegios }}</span></p>
-        <p class="text-secondary fw-bold my-1">Plan: <span class="text-dark">{{ infoUser.plan }}</span></p>
+        <p class="text-secondary fw-bold my-1">Plan: <span class="text-dark">{{ infoUser.plan == '' ? 'Gratuito' : infoUser.plan }}</span></p>
       </div>
-      <div class="col-11 mx-auto">
-        <h6>Privilegios y Permisos</h6>
-        <p class="text-secondary fw-bold my-1">Puesto: <span class="text-dark"></span></p>
-        <p class="text-secondary fw-bold my-1">Accesos: <span class="text-dark"></span></p>
+      <div class="col-11 mx-auto mt-3">
+        <h6 class="text-subtitle fw-bold mb-3">Privilegios y Permisos</h6>
+        <p class="text-secondary fw-bold my-1">Puesto: 
+          <span class="text-dark">{{ infoUser.puesto == '' || infoUser.puesto == undefined ? 'No aplica' : infoUser.puesto }}</span>
+        </p>
+        <p class="text-secondary fw-bold my-1">Sucursal: 
+          <span class="text-dark">{{ infoUser.sucursal == '' || infoUser.sucursal == undefined ? 'Principal' : infoUser.sucursal }}</span>
+        </p>
+        <p class="text-secondary fw-bold my-1">Direccion: 
+          <span class="text-dark">{{ infoUser.direccion == '' || infoUser.direccion == undefined ? 'No aplica' : infoUser.direccion }}</span>
+        </p>
+        <p class="text-secondary fw-bold my-1">Telefono: 
+          <span class="text-dark">{{ infoUser.telefono == '' || infoUser.telefono == undefined ? 'No aplica' : infoUser.telefono }}</span>
+        </p>
       </div>
     </div>
 

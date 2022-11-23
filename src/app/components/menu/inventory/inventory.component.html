@@ -33,12 +33,12 @@
   </section>
 
   <!-- Modal register/update product -->
-  <ion-modal [isOpen]="isModalOpen">
+  <ion-modal [isOpen]="isModalOpen" [backdropDismiss]="false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="reset(); isModalOpen = false">
+            <ion-button (click)="reset()">
               <ion-icon name="arrow-undo"></ion-icon>
             </ion-button>
           </ion-buttons>
