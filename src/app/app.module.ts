@@ -9,11 +9,13 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { SwiperModule } from 'swiper/angular';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/shared/login/login.component';
 import { RegisterComponent } from './components/shared/register/register.component';
 import { UsuarioComponent } from './components/shared/usuario/usuario.component';
+import { PlanesComponent } from './components/shared/planes/planes.component';
 
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
@@ -24,7 +26,8 @@ import { environment } from 'src/environments/environment';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    PlanesComponent
   ],
   imports: [
     BrowserModule, 
@@ -36,7 +39,8 @@ import { environment } from 'src/environments/environment';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebase),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    SwiperModule
   ],
   providers: [
     Camera,

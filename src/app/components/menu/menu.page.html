@@ -39,6 +39,12 @@
               <ion-label>Mi perfil</ion-label>
             </ion-item>
 
+            <ion-item routerDirection="root" [routerLink]="['/dashboard/plan']" lines="none" detail="false" 
+            routerLinkActive="selected">
+              <ion-icon slot="start" md="cube-outline"></ion-icon>
+              <ion-label>Cambiar plan</ion-label>
+            </ion-item>
+
             <ion-item *ngIf="user.uid != ''; else logoutSection" routerDirection="root" lines="none" detail="false" 
             routerLinkActive="selected" (click)="logout()">
               <ion-icon slot="start" md="log-out-outline"></ion-icon>

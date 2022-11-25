@@ -8,6 +8,7 @@ import { StorageComponent } from './storage/storage.component';
 import { StorageItemComponent } from './storage-item/storage-item.component';
 
 import { MenuPage } from './menu.page';
+import { PlanesComponent } from '../shared/planes/planes.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'storage', component: StorageComponent, canActivate: [AuthGuard] },
       { path: 'register/:id', component: StorageItemComponent, canActivate: [AuthGuard] },        
       { path: 'perfil', component: UsuarioComponent, canActivate: [AuthGuard] },
+      { path: 'plan', component: PlanesComponent },
     ]
   }
 ];

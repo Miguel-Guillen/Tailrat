@@ -5,10 +5,13 @@ import { ProductService } from 'src/app/core/service/product.service';
 import { StorageService } from 'src/app/core/service/storage.service';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { UserAuth } from 'src/app/core/models/user-auth';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Product, ProductInventory } from 'src/app/core/models/product';
+import SwiperCore, { Autoplay, Swiper } from "swiper";
+SwiperCore.use([Autoplay]);
 
 @Component({
   selector: 'app-storage-item',
@@ -37,6 +40,14 @@ export class StorageItemComponent implements OnInit {
     'La granja'
   ]
 
+  advertising = [
+    'https://www.caliente.mx/library/assets/casino/promotions/thumbnails/300-bonus.jpg',
+    'https://www.marketeroslatam.com/wp-content/uploads/2022/06/coca-cola-840x400.jpg',
+    'https://s3.amazonaws.com/lmxwebsite/media/news/38642/size2/38642.jpg',
+    'https://www.comunicarseweb.com/sites/default/files/styles/galeria_noticias/public/biblioteca/images//1437506486_Fanta-Fanta-Taste-Grafica-1.jpg?itok=BQrq6hlk',
+  ];
+  random = 0
+
   constructor(
     private auth: AuthService, 
     private route: ActivatedRoute,
@@ -44,13 +55,15 @@ export class StorageItemComponent implements OnInit {
     private _serviceStorage: StorageService,
     private sheet: ActionSheetController,
     private alertController: AlertController,
-    private formB: FormBuilder
+    private formB: FormBuilder,
+    private router: Router
     ) {}
 
   ngOnInit() {
     this.authUser();
     this.id = this.route.snapshot.paramMap.get('id');
     this.getData();
+    this.random = Math.floor(Math.random() * this.advertising.length);;
   }
 
   createForm(){
@@ -158,6 +171,10 @@ export class StorageItemComponent implements OnInit {
     });
 
     await actionSheet.present();
+  }
+
+  send(path: string){
+    this.router.navigate(['/dashboard/' + path]);
   }
 
   get prod(){

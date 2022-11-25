@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { UserAuth } from 'src/app/core/models/user-auth';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { ProductService } from 'src/app/core/service/product.service';
+import { Router } from '@angular/router';
 
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import SwiperCore, { Autoplay, Swiper } from "swiper";
+SwiperCore.use([Autoplay]);
 
 @Component({
   selector: 'app-inventory',
@@ -35,20 +38,28 @@ export class InventoryComponent implements OnInit {
     'La costeña',
     'La granja'
   ]
+  advertising = [
+    'https://www.caliente.mx/library/assets/casino/promotions/thumbnails/300-bonus.jpg',
+    'https://www.marketeroslatam.com/wp-content/uploads/2022/06/coca-cola-840x400.jpg',
+    'https://s3.amazonaws.com/lmxwebsite/media/news/38642/size2/38642.jpg',
+    'https://www.comunicarseweb.com/sites/default/files/styles/galeria_noticias/public/biblioteca/images//1437506486_Fanta-Fanta-Taste-Grafica-1.jpg?itok=BQrq6hlk',
+  ];
+  random = 0
   
   constructor(private auth: AuthService, private _productService: ProductService,
     private formB: FormBuilder, private alertController: AlertController,
-    private camera: Camera) {
+    private camera: Camera, private router: Router) {
       this.formInventory = this.createForm();
-    }
+  }
 
   ngOnInit() {
     this.authUser();
     this.getProducts();
+    this.random = Math.floor(Math.random() * this.advertising.length);;
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();    
+    this.subscription.unsubscribe();
   }
 
   createForm(): FormGroup {
@@ -256,6 +267,16 @@ export class InventoryComponent implements OnInit {
       buttons: ['Aceptar'],
     });
     await alert.present();
+  }
+
+  setSwiperInstance(swiper: Swiper) {
+    setInterval(() => {      
+      swiper.slideNext();
+    }, 4000);
+  }
+
+  send(path: string){
+    this.router.navigate(['/dashboard/' + path]);
   }
 
   get title(){

@@ -10,6 +10,15 @@
 </ion-header>
  
 <ion-content>
+  <section *ngIf="user.plan == '' " class="text-center">
+    <swiper [spaceBetween]="30" [centeredSlides]="true" [loop]="true" (click)="send('plan')" class="mySwiper">
+      <ng-template swiperSlide>
+        <img [src]="advertising[random]">
+      </ng-template>
+    </swiper>
+    <span class="text-subtitle">Para quitar los anuncion aumente de plan</span>
+  </section>
+
   <section class="ion-padding">
     <div class="row d-flex justify-content-evenly mt-2">
       <div class="col-4 d-flex align-items-center">

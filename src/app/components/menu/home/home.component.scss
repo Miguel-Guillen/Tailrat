@@ -1,33 +1,39 @@
-ion-content h4, h5, h3, h2 {
+h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #073086;
+}
+h5, .text-subtitle {
+    font-size: 16px;
     font-weight: bold;
 }
-p {
-    font-size: 14px; 
+.text-subtitle {
+    color: #073086;
+}
+p, span, .btn, ion-label, input, select {
+    font-size: 13px !important;
+}
+label {
+    font-size: 14px !important;
+}
+p, span, ion-label, h4, h5 {
+    margin: 1px 0;
+}
+.p-button {
+    font-size: 13px !important;
 }
 
-.item {
-    width: 90vw;
-    margin: auto;
+.contain {
+    height: 80vh;
 }
-.item-container {
-    background-color: #444;
-    color: #eee;
-    padding: 30px;
+
+.tarjeta {
+    cursor: pointer;
     border-radius: 20px;
-    font-size: 14px;
-}
-.item-container h2 {
-    color: #367288;
-    margin: 20px 0 16px;
-    text-align: center;
-}
-.item ion-button {
-    --border-radius: 20px;
-}
-.item ul li {
-    margin: 10px 0;
-}
-
-#products p {
-    margin: 3px 0;
+    width: 130px;
+    
+    ion-icon {
+        margin-top: 20px;
+        transform: scale(2.7);
+    }
 }

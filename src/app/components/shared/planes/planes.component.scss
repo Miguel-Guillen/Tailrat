@@ -1,0 +1,33 @@
+ion-content h4, h5, h3, h2 {
+    font-weight: bold;
+}
+p {
+    font-size: 14px; 
+}
+
+.item {
+    width: 90vw;
+    margin: auto;
+}
+.item-container {
+    background-color: #444;
+    color: #eee;
+    padding: 30px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+.item-container h2 {
+    color: #367288;
+    margin: 20px 0 16px;
+    text-align: center;
+}
+.item ion-button {
+    --border-radius: 20px;
+}
+.item ul li {
+    margin: 10px 0;
+}
+
+#products p {
+    margin: 3px 0;
+}

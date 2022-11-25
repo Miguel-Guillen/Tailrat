@@ -10,59 +10,36 @@
 </ion-header>
  
 <ion-content>
-  <div *ngIf="user.plan != '';else logged">
-    <section id="products" class="ion-padding">
-      <h4>Productos recientes</h4>
-      <div *ngIf="user.level == 'Administrador';else noProducts " class="row d-flex justify-content-evenly mt-4 text-center">
-        <div *ngFor="let product of items" class="col-5 border rounded bg-light p-2 mb-2">
-          <img class="img-thumbnail w-75" src="../../../../assets/img/products_blank.jpg" alt="">
-          <p class="text-secondary">{{ product.title }}</p>
-          <p class="fw-bold">${{ product.precio }}</p>
-        </div>
+  <section *ngIf="user.plan == '' " class="text-center">
+    <swiper [spaceBetween]="30" [centeredSlides]="true" [loop]="true" (click)="send('plan')" class="mySwiper">
+      <ng-template swiperSlide>
+        <img [src]="advertising[random]">
+      </ng-template>
+    </swiper>
+    <span class="text-subtitle">Para quitar los anuncion aumente de plan</span>
+  </section>
+
+  <section [ngClass]="user.plan != '' ? 'contain' : '' " class="ion-padding d-flex align-items-center">
+    <div class="row d-flex justify-content-evenly text-center">
+      <div class="tarjeta bg-light border my-4 p-3" (click)="send('inventory')">
+        <h4>Catalogo</h4>
+        <ion-icon name="pricetag"></ion-icon>
       </div>
-    </section>
-
-    <section class="bg-dark text-white ion-padding mx-4 rounded">
-      <h5>Listado de proveedores</h5>
-      <p>En mantenimiento</p>
-    </section>
-  </div>
+      <div class="tarjeta bg-light border my-4 p-3" (click)="send('storage')">
+        <h4>Almacen</h4>
+        <ion-icon name="server"></ion-icon>
+      </div>
+      <div class="tarjeta bg-light border my-4 p-3" (click)="send('plan')">
+        <h4>Planes</h4>
+        <ion-icon name="cube"></ion-icon>
+      </div>
+      <div class="tarjeta bg-light border my-4 p-3" (click)="send('perfil')">
+        <h4>Perfil</h4>
+        <ion-icon name="person-circle"></ion-icon>
+      </div>
+    </div>
+  </section>
 </ion-content>
-
-<ng-template #logged>
-  <div class="ion-padding">
-      <h5>Bienvenido a su sistema de inventario</h5>
-      <p>Para acceder nuestros servicios consigue nuestros paquetes</p>
-      <section class="item">
-
-        <div class="col-12 item-container my-2 my-lg-1">
-          <h5>Suscripcion Plan Empresario</h5>
-          <p>por el siguiente plan obtienes</p>
-          <ul>
-            <li>Roles de usuario</li>
-            <li>Gestion de proveedores</li>
-            <li>Registro por codigo de barras</li>
-          </ul>
-          <h2>$249.99 Bimestral</h2>
-          <ion-button shape="round" expand="full">Obtener</ion-button>
-        </div>
-
-        <div class="col-12 item-container my-2 my-lg-1">
-          <h5>Suscripcion Plan Premium</h5>
-          <ul>
-            <li>Roles de usuario</li>
-            <li>Gestion de proveedores</li>
-            <li>Registro por codigo de barras</li>
-            <li>Graficos en tiempo real</li>
-            <li>Alertas de escasez de productos</li>
-          </ul>
-          <h2>$449.99 Bimestral</h2>
-          <ion-button shape="round" expand="full">Obtener</ion-button>
-        </div>
-
-      </section>
-  </div>
-</ng-template>
 
 <ng-template #noProducts>
   <div class="row text-center">

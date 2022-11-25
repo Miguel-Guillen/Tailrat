@@ -27,6 +27,7 @@
     "@capacitor/haptics": "4.0.1",
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
+    "@coreui/angular": "^4.2.16",
     "@ionic/angular": "^6.1.9",
     "@ionic/cordova-builders": "^7.0.0",
     "@ionic/storage-angular": "^3.0.6",
@@ -38,6 +39,7 @@
     "ionicons": "^6.0.3",
     "npm": "^8.19.2",
     "rxjs": "~6.6.0",
+    "swiper": "^8.4.5",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

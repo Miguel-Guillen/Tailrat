@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MenuPageRoutingModule } from './menu-routing.module';
+import { SwiperModule } from 'swiper/angular';
 
 import { MenuPage } from './menu.page';
 import { HomeComponent } from './home/home.component';
@@ -16,7 +17,8 @@ import { StorageItemComponent } from './storage-item/storage-item.component';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    MenuPageRoutingModule
+    MenuPageRoutingModule,
+    SwiperModule
   ],
   declarations: [
     MenuPage,
